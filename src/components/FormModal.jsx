@@ -7,6 +7,7 @@ function FormModal() {
 
     return (
         <Modal
+            dimmer='blurring'
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             size='tiny'
