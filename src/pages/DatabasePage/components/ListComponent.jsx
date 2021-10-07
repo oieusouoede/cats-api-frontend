@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useCatStore } from "../../../storage/cat"
 import { Button, Checkbox, Header, Icon, Table } from "semantic-ui-react"
+import FormModal from "../../../components/FormModal"
 
 const Container = styled.div`
 
@@ -58,14 +59,15 @@ const ListComponent = () => {
             <Table.Row>
             <Table.HeaderCell />
             <Table.HeaderCell colspan="4">
-                <Button
+                <FormModal/>
+                {/* <Button
                     floated='right'
                     icon
                     labelPosition='left'
                     primary
                     size='small'>
                     <Icon name='plus square'/> Add Cat
-                </Button>
+                </Button> */}
                 <Button size='small'>Delete</Button>
                 <Button size='small'>Update</Button>
             </Table.HeaderCell>

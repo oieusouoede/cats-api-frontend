@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { useCatStore } from "../../../storage/cat"
 import { Button, Form, Label } from "semantic-ui-react"
 
-function RegisterForm () {
+function RegisterForm ({setFalse}) {
     const addCat = useCatStore((state) => state.addCat)
     
     const {
@@ -94,6 +94,9 @@ function RegisterForm () {
             </Form.Field>
 
             <Button type="submit">Submit</Button>
+            <Button type="button" color='red' onClick={setFalse}>
+            Cancel
+            </Button>
         </Form>
 
     )
