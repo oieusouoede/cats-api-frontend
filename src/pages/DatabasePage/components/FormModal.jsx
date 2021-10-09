@@ -14,6 +14,7 @@ function FormModal({ idValue }) {
     
 
     const addCat = useCatStore((state) => state.addCat)
+    const updateCat = useCatStore((state) => state.updateCat)
     const cats = useCatStore((state) => state.cats)
     
     const {
@@ -25,8 +26,13 @@ function FormModal({ idValue }) {
     } = useForm()
     
     const submitForm = (data) => {
-        addCat(data)
-        reset()
+        if (!!idValue){
+            updateCat(data)
+            setOpen(false)
+        } else {
+            addCat(data)
+            reset()
+        }
     }
 
     if (!!idValue) {

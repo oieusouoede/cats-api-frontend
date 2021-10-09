@@ -11,6 +11,22 @@ let storeCat = (set) => ({
   rmCat: (id) => 
     set((state) => ({
       cats: state.cats.filter((cat) => cat.id !== id)
+    })),
+
+  updateCat: (data) =>
+    set((state) => ({
+      cats: state.cats.map(c => {
+        if (c.id === data.id) {
+          return {
+            ...c,
+            name: data.name,
+            age: data.age,
+            pastime: data.pastime
+          }
+        } else {
+          return c
+        }
+      })
     }))
 })
 
