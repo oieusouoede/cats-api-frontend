@@ -1,9 +1,7 @@
 import styled from "styled-components"
 import ListComponent from "./components/ListComponent"
-import FormComponent from "./components/FormComponent"
 
 const Main = styled.main`
-    
     
     width: 1000px;
     background-color: gray;

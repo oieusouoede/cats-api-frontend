@@ -14,4 +14,4 @@ let storeCat = (set) => ({
 
 storeCat = persist(storeCat, { name: "cats-database" })
 
-export const useCatStore = create(storeCat);
+export const useCatStore = create(storeCat)
