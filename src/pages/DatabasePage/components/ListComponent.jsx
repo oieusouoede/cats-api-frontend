@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useCatStore } from "../../../storage/cat"
 import { Button, Header, Table } from "semantic-ui-react"
-import FormModal from "../../../components/FormModal"
+import FormModal from "./FormModal"
 
 const Container = styled.div`
 
@@ -20,25 +20,25 @@ const ListComponent = () => {
 
     const renderData = () => {
         return cats.map((cat) => (
-            <Table.Row>
+            <Table.Row key={cat.id}>
                 <Table.Cell>{cat.id}</Table.Cell>
                 <Table.Cell>{cat.name}</Table.Cell>
                 <Table.Cell>{cat.age}</Table.Cell>
                 <Table.Cell>{cat.pastime}</Table.Cell>
                 <Table.Cell>
                     <Button 
-                        color='blue' 
-                        size='small'>
-                            Update
-                    </Button>
-                </Table.Cell>
-                <Table.Cell>
-                    <Button 
                         onClick={() => {rmCat(cat.id)}}
+                        floated='right'
                         color='red' 
                         size='small'>
                             Delete
                     </Button>
+                </Table.Cell>
+                <Table.Cell>
+                    <FormModal 
+                        headerText='Update cat'
+                        buttonText='Update'
+                    />
                 </Table.Cell>
             </Table.Row>
         ))
@@ -64,8 +64,11 @@ const ListComponent = () => {
         <Table.Footer >
             <Table.Row>
             <Table.HeaderCell />
-            <Table.HeaderCell colspan="5">
-                <FormModal/>
+            <Table.HeaderCell colSpan="5">
+                <FormModal
+                    headerText='Register new cat'
+                    buttonText='Add Cat'
+                />
             </Table.HeaderCell>
             </Table.Row>
         </Table.Footer>
