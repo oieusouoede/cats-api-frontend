@@ -4,7 +4,9 @@ import { persist } from "zustand/middleware"
 let storeCat = (set) => ({
   cats: [],
   addCat: (newCat) =>
-    set((state) => ({ cats: [...state.cats, newCat] })),
+    set((state) => ({ 
+      cats: [...state.cats, newCat] 
+    })),
   
   rmCat: (id) => 
     set((state) => ({

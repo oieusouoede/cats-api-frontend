@@ -4,22 +4,41 @@ import { Modal, Button, Form, Label } from "semantic-ui-react"
 import { useForm } from "react-hook-form"
 import { useCatStore } from "../../../storage/cat"
 
-function FormModal({ headerText, buttonText }) {
+function FormModal({ idValue }) {
+
+    var headerText = 'Register new cat'
+    var buttonText = 'Add Cat'
+    var disabled = false 
+
     const [open, setOpen] = useState(false)
+    
 
     const addCat = useCatStore((state) => state.addCat)
+    const cats = useCatStore((state) => state.cats)
     
     const {
         register, 
         handleSubmit,
         reset,
+        setValue,
         formState: { errors },
     } = useForm()
     
     const submitForm = (data) => {
-        console.log(data)
         addCat(data)
         reset()
+    }
+
+    if (!!idValue) {
+
+        headerText = 'Update cat'
+        buttonText = 'Update'        
+        const cat = cats.find((cat) => cat.id === idValue)
+        setValue('id', cat.id)
+        setValue('name', cat.name)
+        setValue('age', cat.age)
+        setValue('pastime', cat.pastime)
+        disabled = !disabled
     }
 
     return (
@@ -44,6 +63,7 @@ function FormModal({ headerText, buttonText }) {
                     <Form.Field error={!!errors.id}>
                         <label>ID</label>
                         <input
+                            disabled={disabled}
                             placeholder="Enter the cat's id"
                             type="number"
                             {...register("id", { 
