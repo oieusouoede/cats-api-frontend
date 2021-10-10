@@ -16,7 +16,7 @@ const Container = styled.div`
 const ListComponent = () => {
 
     const cats  = useCatStore((state) => state.cats)
-    const {rmCat} = useCatStore()
+    const rmCat = useCatStore((state) => state.rmCat)
 
     const renderData = () => {
         return cats.map((cat) => (
@@ -36,6 +36,7 @@ const ListComponent = () => {
                 </Table.Cell>
                 <Table.Cell>
                     <FormModal 
+                        idValue={(cat.id)}
                         headerText='Update cat'
                         buttonText='Update'
                     />
