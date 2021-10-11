@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
 
 html {
   box-sizing: border-box;
@@ -18,11 +19,10 @@ body {
 
 #root {
   height: 100%;
-  padding-top: 70px;
   display: flex;
   align-items: center;
-  background-color: rgb(52, 52, 52);
-  
+  background-image: url(https://raw.githubusercontent.com/oieusouoede/cats-api-frontend/main/assets/backgrounds/landing-page.jpg); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom right;
 }
-
-/* https://am23.mediaite.com/tms/cnt/uploads/2012/10/CatsWorking.jpg */
