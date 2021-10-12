@@ -1,12 +1,19 @@
 import { Menu } from "semantic-ui-react"
+import { NavLink } from "react-router-dom"
 
 function NavBar () {
 
     return(
         <Menu size='massive' fixed='top' inverted>
-            <Menu.Item name='home'/>
-            <Menu.Item name='database'/>
-            <Menu.Item name='about'/>
+            <Menu.Item
+            as={NavLink} to='/'
+             name='home'/>
+            <Menu.Item
+            as={NavLink} to='/database'
+             name='database'/>
+            <Menu.Item
+            as={NavLink} to='/about'
+             name='about'/>
         </Menu>
     )
 }
