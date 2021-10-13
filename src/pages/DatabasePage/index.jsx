@@ -1,7 +1,8 @@
 import styled from "styled-components"
-import { useCatStore } from "../../storage/cat"
 import { Container, Button, Header, Table } from "semantic-ui-react"
 import FormModal from "./components/FormModal"
+import { getCats, rmCat } from "../../api/CatsApiBackend"
+import { useEffect, useState } from "react"
 
 const TableDiv = styled(Container)`
 
@@ -17,9 +18,21 @@ const TableDiv = styled(Container)`
 
 function DatabasePage () {
 
-    const cats  = useCatStore((state) => state.cats)
-    const rmCat = useCatStore((state) => state.rmCat)
+    const [cats, setCats] = useState([]) 
 
+    useEffect(() => {
+        async function fetchData() {
+          const data = await getCats()
+          setCats(data)
+        }
+        fetchData()
+    }, [])
+
+    function deleteData(id) {
+        rmCat(id)
+        
+    }
+    
     const renderData = () => {
         return cats.map((cat) => (
             <Table.Row key={cat.id}>
@@ -29,7 +42,7 @@ function DatabasePage () {
                 <Table.Cell>{cat.pastime}</Table.Cell>
                 <Table.Cell>
                     <Button 
-                        onClick={() => {rmCat(cat.id)}}
+                        onClick={() => {deleteData(cat.id)}}
                         floated='right'
                         color='red' 
                         size='small'>
@@ -38,7 +51,7 @@ function DatabasePage () {
                 </Table.Cell>
                 <Table.Cell>
                     <FormModal 
-                        idValue={(cat.id)}
+                        catData={(cat)}
                     />
                 </Table.Cell>
             </Table.Row>

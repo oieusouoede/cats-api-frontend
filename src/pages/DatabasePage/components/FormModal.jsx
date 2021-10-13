@@ -2,21 +2,16 @@
 import { useState } from "react"
 import { Modal, Button, Form, Label } from "semantic-ui-react"
 import { useForm } from "react-hook-form"
-import { useCatStore } from "../../../storage/cat"
+import { addCat, updateCat } from "../../../api/CatsApiBackend"
 
-function FormModal({ idValue }) {
+function FormModal({ catData }) {
 
     var headerText = 'Register new cat'
     var buttonText = 'Add Cat'
     var disabled = false 
 
     const [open, setOpen] = useState(false)
-    
-
-    const addCat = useCatStore((state) => state.addCat)
-    const updateCat = useCatStore((state) => state.updateCat)
-    const cats = useCatStore((state) => state.cats)
-    
+        
     const {
         register, 
         handleSubmit,
@@ -26,7 +21,7 @@ function FormModal({ idValue }) {
     } = useForm()
     
     const submitForm = (data) => {
-        if (!!idValue){
+        if (!!catData){
             updateCat(data)
             setOpen(false)
         } else {
@@ -35,15 +30,13 @@ function FormModal({ idValue }) {
         }
     }
 
-    if (!!idValue) {
-
+    if (!!catData) {
         headerText = 'Update cat'
         buttonText = 'Update'        
-        const cat = cats.find((cat) => cat.id === idValue)
-        setValue('id', cat.id)
-        setValue('name', cat.name)
-        setValue('age', cat.age)
-        setValue('pastime', cat.pastime)
+        setValue('id', catData.id)
+        setValue('name', catData.name)
+        setValue('age', catData.age)
+        setValue('pastime', catData.pastime)
         disabled = !disabled
     }
 
