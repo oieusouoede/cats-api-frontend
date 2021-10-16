@@ -1,7 +1,8 @@
 import styled from "styled-components"
-import { useCatStore } from "../../storage/cat"
 import { Container, Button, Header, Table } from "semantic-ui-react"
 import FormModal from "./components/FormModal"
+import { getCats, rmCat } from "../../api/CatsApiBackend"
+import { useQuery, useMutation, useQueryClient } from "react-query"
 
 const TableDiv = styled(Container)`
 
@@ -17,11 +18,40 @@ const TableDiv = styled(Container)`
 
 function DatabasePage () {
 
-    const cats  = useCatStore((state) => state.cats)
-    const rmCat = useCatStore((state) => state.rmCat)
+    const { data, error, isError, isLoading } = useQuery('cats', getCats)
+    const queryClient = useQueryClient()
+        
+    const deleteMutation = useMutation(
+        (id) => rmCat(id),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries()
+            }
+        })
+    
+    async function deleteData(id) {
+        deleteMutation.mutate(id)
+    }
+    
+    const renderData = (data) => {
 
-    const renderData = () => {
-        return cats.map((cat) => (
+        if(isLoading){
+            return <Table.Row>
+                        <Table.Cell colSpan='5'>
+                            Loading...
+                        </Table.Cell>
+                    </Table.Row>
+        }
+
+        if(isError){
+            return <Table.Row>
+                        <Table.Cell colSpan='5'>
+                            Error: {error.message}
+                        </Table.Cell>
+                    </Table.Row>
+        }
+
+        return data.map((cat) => (
             <Table.Row key={cat.id}>
                 <Table.Cell>{cat.id}</Table.Cell>
                 <Table.Cell>{cat.name}</Table.Cell>
@@ -29,7 +59,7 @@ function DatabasePage () {
                 <Table.Cell>{cat.pastime}</Table.Cell>
                 <Table.Cell>
                     <Button 
-                        onClick={() => {rmCat(cat.id)}}
+                        onClick={() => {deleteData(cat.id)}}
                         floated='right'
                         color='red' 
                         size='small'>
@@ -38,7 +68,7 @@ function DatabasePage () {
                 </Table.Cell>
                 <Table.Cell>
                     <FormModal 
-                        idValue={(cat.id)}
+                        catData={(cat)}
                     />
                 </Table.Cell>
             </Table.Row>
@@ -61,7 +91,7 @@ function DatabasePage () {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {renderData()}
+                        {renderData(data)}
                     </Table.Body>
                     <Table.Footer >
                         <Table.Row>

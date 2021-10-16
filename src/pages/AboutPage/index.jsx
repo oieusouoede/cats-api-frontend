@@ -1,4 +1,3 @@
-import { Container, Image } from "semantic-ui-react"
 import styled from "styled-components"
 
 const Content = styled.div`
@@ -8,7 +7,6 @@ const Content = styled.div`
     padding: 3rem;
     margin: 3rem;
     width: 700px;
-
 
 `
 
