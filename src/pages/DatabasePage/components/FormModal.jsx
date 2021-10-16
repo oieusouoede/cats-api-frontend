@@ -3,15 +3,30 @@ import { useState } from "react"
 import { Modal, Button, Form, Label } from "semantic-ui-react"
 import { useForm } from "react-hook-form"
 import { addCat, updateCat } from "../../../api/CatsApiBackend"
+import { useMutation, useQueryClient } from "react-query"
 
 function FormModal({ catData }) {
 
-    var headerText = 'Register new cat'
-    var buttonText = 'Add Cat'
-    var disabled = false 
+    const queryClient = useQueryClient()
 
-    const [open, setOpen] = useState(false)
-        
+    const createMutation = useMutation((data) =>
+        addCat(data),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries()
+            }
+        }
+    )
+
+    const updateMutation = useMutation((data) =>
+        updateCat(data),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries()
+            }
+        }
+    ) 
+    
     const {
         register, 
         handleSubmit,
@@ -19,16 +34,10 @@ function FormModal({ catData }) {
         setValue,
         formState: { errors },
     } = useForm()
-    
-    const submitForm = (data) => {
-        if (!!catData){
-            updateCat(data)
-            setOpen(false)
-        } else {
-            addCat(data)
-            reset()
-        }
-    }
+
+    var headerText = 'Register new cat'
+    var buttonText = 'Add Cat'
+    var disabled = false 
 
     if (!!catData) {
         headerText = 'Update cat'
@@ -38,6 +47,18 @@ function FormModal({ catData }) {
         setValue('age', catData.age)
         setValue('pastime', catData.pastime)
         disabled = !disabled
+    }
+
+    const [open, setOpen] = useState(false)
+        
+    const submitForm = async (data) => {
+        if (!!catData){
+            updateMutation.mutate(data)
+            setOpen(false)
+        } else {
+            createMutation.mutate(data)
+            reset()
+        }
     }
 
     return (

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Container, Button, Header, Table } from "semantic-ui-react"
 import FormModal from "./components/FormModal"
 import { getCats, rmCat } from "../../api/CatsApiBackend"
-import { useEffect, useState } from "react"
+import { useQuery, useMutation, useQueryClient } from "react-query"
 
 const TableDiv = styled(Container)`
 
@@ -18,23 +18,40 @@ const TableDiv = styled(Container)`
 
 function DatabasePage () {
 
-    const [cats, setCats] = useState([]) 
-
-    useEffect(() => {
-        async function fetchData() {
-          const data = await getCats()
-          setCats(data)
-        }
-        fetchData()
-    }, [])
-
-    function deleteData(id) {
-        rmCat(id)
+    const { data, error, isError, isLoading } = useQuery('cats', getCats)
+    const queryClient = useQueryClient()
         
+    const deleteMutation = useMutation(
+        (id) => rmCat(id),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries()
+            }
+        })
+    
+    async function deleteData(id) {
+        deleteMutation.mutate(id)
     }
     
-    const renderData = () => {
-        return cats.map((cat) => (
+    const renderData = (data) => {
+
+        if(isLoading){
+            return <Table.Row>
+                        <Table.Cell colSpan='5'>
+                            Loading...
+                        </Table.Cell>
+                    </Table.Row>
+        }
+
+        if(isError){
+            return <Table.Row>
+                        <Table.Cell colSpan='5'>
+                            Error: {error.message}
+                        </Table.Cell>
+                    </Table.Row>
+        }
+
+        return data.map((cat) => (
             <Table.Row key={cat.id}>
                 <Table.Cell>{cat.id}</Table.Cell>
                 <Table.Cell>{cat.name}</Table.Cell>
@@ -74,7 +91,7 @@ function DatabasePage () {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {renderData()}
+                        {renderData(data)}
                     </Table.Body>
                     <Table.Footer >
                         <Table.Row>

@@ -6,7 +6,7 @@ function NavBar () {
     return(
         <Menu size='massive' fixed='top' inverted>
             <Menu.Item
-            as={NavLink} to='/'
+            as={NavLink} to='/home'
              name='home'/>
             <Menu.Item
             as={NavLink} to='/database'
