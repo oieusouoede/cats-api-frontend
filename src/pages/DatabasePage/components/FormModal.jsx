@@ -37,7 +37,6 @@ function FormModal({ catData }) {
 
     var headerText = 'Register new cat'
     var buttonText = 'Add Cat'
-    var disabled = false 
 
     if (!!catData) {
         headerText = 'Update cat'
@@ -46,7 +45,6 @@ function FormModal({ catData }) {
         setValue('name', catData.name)
         setValue('age', catData.age)
         setValue('pastime', catData.pastime)
-        disabled = !disabled
     }
 
     const [open, setOpen] = useState(false)
@@ -80,23 +78,6 @@ function FormModal({ catData }) {
             <Modal.Header>{headerText}</Modal.Header>
             <Modal.Content>
                 <Form onSubmit={handleSubmit(submitForm)}>
-                    <Form.Field error={!!errors.id}>
-                        <label>ID</label>
-                        <input
-                            disabled={disabled}
-                            placeholder="Enter the cat's id"
-                            type="number"
-                            {...register("id", { 
-                                required: {value: true, message: "Please, inform an ID number" },
-                                min: {value: 0, message: "Invalid number"},
-                            })}
-                        />
-                        {errors.id && (
-                            <Label basic color="red" pointing="above">
-                                {errors.id.message}
-                            </Label>
-                        )}
-                    </Form.Field>
 
                     <Form.Field  error={!!errors.name}>
                         <label>Name</label>

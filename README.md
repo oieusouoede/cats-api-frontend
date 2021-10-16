@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Cat Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
 
-## Available Scripts
+This is a web application for registering cats. The reason I made this project is because I needed some experience with react and to build something to display in my portfolio.
 
-In the project directory, you can run:
+It's a very simple project (and very poorly designed) but it was a huge challenge to put it together, especially for someone who have never messed with react ever before.
+
+## Backend Integration
+
+This webpage is meant to be integrated with a 
+backend API that I made with Java Spring. Its souce code is available in <a href="https://github.com/oieusouoede/cats-api-backend"> this repository</a> and can also be found running on Heroku through
+<a href="https://cats-api-backend.herokuapp.com/swagger-ui/"> this link</a>.
+
+<img height="250em" src="assets/previews/backend.png"/>
+
+## Running it Locally
+
+To run the applicaton locally you need to run:
+
+### `npm install`
+
+To install all dependencies, and then:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+To run the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Previews
 
-### `npm test`
+### Landing page carousel
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img height="250em" src="assets/previews/landing-page-preview.gif"/>
 
-### `npm run build`
+Built using [pure-react-carousel](https://github.com/express-labs/pure-react-carousel)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Page routing
+<img height="250em" src="assets/previews/page-routing-preview.gif"/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Using [React Router](https://reactrouter.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Database page
 
-### `npm run eject`
+<img height="250em" src="assets/previews/database-preview.png"/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Made using [Semantic-UI](https://react.semantic-ui.com/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Data deletion
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<img height="250em" src="assets/previews/database-deletion.gif"/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+All CRUD operations were implemented using [Axios](https://axios-http.com/docs/intro) and [React Query](https://react-query.tanstack.com/)
 
-## Learn More
+### Form Modal
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+I tried to implement the modal in a way I could use it for both the Create and Update operations slightly changing its behaviour.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create:
+<img height="250em" src="assets/previews/modal-create-preview.gif"/>
 
-### Code Splitting
+Update:
+<img height="250em" src="assets/previews/modal-update-preview.gif"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Made with [Modal Component](https://react.semantic-ui.com/modules/modal/) from Semantic-UI
 
-### Analyzing the Bundle Size
+And finally, the
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### About Page
 
-### Making a Progressive Web App
+<img height="250em" src="assets/previews/about-page-preview.png"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Final thoughts
 
-### Advanced Configuration
+The web page needs some fixing to make it responsive. I'm looking forward to improve this code and also add some cool features like allowing the user to upload cat pictures, cause any cat related web app without cat pictures is a complete waste of time.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Edd.
